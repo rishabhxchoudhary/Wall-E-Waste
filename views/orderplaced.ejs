@@ -1,0 +1,95 @@
+<%- include('header') -%>
+<style>
+    #tick-mark {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    }
+
+    #tick-mark::before {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 50%;
+        width: 3px;
+        background-color: black;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+
+    #tick-mark::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background-color: black;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+    .circle{
+        height: 250px;
+        width: 250px;
+    }
+    .body{
+        height: 85vh;
+        /* border: 1px solid red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .circle{
+        margin: 10px;
+        border-radius: 50%;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tick-mark{
+        transform: scale(5);
+    }
+    .text{
+        font-size: large;
+        /* font-weight: 600; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .text p, .text span{
+        font-weight: 600;
+    }
+    
+</style>
+<div class="body">
+    <div class="heading">
+        <h1>Pickup Request Placed!</h1>
+    </div>
+    <div class="circle">
+        <div id="tick-mark"></div>
+    </div>
+    <div class="text">
+        <p>Thanks for saving the environment</p>
+        <p> Your contribution matters</p>
+        <div>
+            <span>Otp has been sent!</span><br>
+            Your Order number is <%= orderID %>;
+        </div>
+
+    </div>
+    
+</div>
+<script>
+    let x = Math.floor(Math.random() * 100000);
+    const r = document.getElementById("random");
+    r.innerHTML=x;
+</script>
+
+
+<%- include('footer') -%>

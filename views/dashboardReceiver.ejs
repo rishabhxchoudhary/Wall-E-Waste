@@ -1,0 +1,112 @@
+<%- include('headerReceiver') -%>
+<style>
+    .main-reciever {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .orders {
+        /* border: 1px solid violet; */
+        height: 100px;
+        width: auto;
+    }
+    .delivery{
+        display:flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .greet{
+        padding: 10px;
+    }
+
+    #multimap{
+    height: 450px;
+    width: 450px;
+    border: 1px solid black;
+    }
+    .orders{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center
+    }
+    .content{
+        margin-top:100px;
+    }
+</style>
+<div class="main-reciever">
+    <div class="greet">
+        <h2>Welcome <%= locals.user ? user.name: "User" %></h2>
+    </div>
+    <div class="delivery">
+        <div class="orders">
+            <div class="">
+                <h1>Hi</h1>
+                <h3><p>Here is a map showing where you have to collect from -></p></h3>
+            </div>
+            <div class="content">
+               <h5><p>Take a step in making the environment Clean</p><p>Thanks for your work.</p></h5> 
+                
+            </div>
+        </div>
+        <div class="map-holder">
+            <div id="multimap" class="multimap"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var latitude = 0;
+    var longitude = 0;
+    function changeCoords(lat, long) {
+        latitude = lat;
+        longitude = long;
+    }
+    
+    async function createMarker(coordinates) {
+        var mark = await L.marker([coordinates[0],coordinates[1]]).addTo(mymap);
+        mark.bindPopup(`latitude: ${coordinates[0]} , Longitude ${coordinates[1]}`);
+    }
+    
+    const mymap = L.map('multimap').setView([latitude, longitude], 15);
+    const attribution =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+    
+    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const tiles = L.tileLayer(tileUrl, { attribution });
+    tiles.addTo(mymap);
+    if('geolocation' in navigator) {
+        console.log('yes');
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log(position.coords);
+            changeCoords(position.coords.latitude, position.coords.longitude);
+            L.circle([position.coords.latitude, position.coords.longitude], {
+                color: 'blue',
+                fillColor: '#7669EB',
+                fillOpacity: 0.5,
+                radius: 10
+            }).addTo(mymap).bindPopup("Current Location");
+        });
+    }
+
+    
+    var coordinates =  [
+        <% for(var i of orders){ %>
+            ["<%= i.coordinates.latitude %>","<%= i.coordinates.longitude %>"],
+        <% } %>
+    ];
+    console.log(coordinates);
+    var destination = [28.6134895,77.0421524999999];
+    L.circle([destination[0],destination[1]], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 10
+    }).addTo(mymap).bindPopup("Central Depot").openPopup();
+    coordinates.forEach(createMarker);
+    mymap.setView([destination[0],destination[1]], 15);
+</script>
+
+<%- include('footer') -%>

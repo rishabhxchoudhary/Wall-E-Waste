@@ -1,0 +1,52 @@
+<%- include('header') -%>
+
+<style>
+.page{
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* padding: 20px; */
+}
+.score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.char{
+    margin: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 100px;
+}
+
+.state p{
+    font-weight: 500;
+}
+
+</style>
+
+<div class="page">
+    <div class="title">
+        <h1>Your Points :</h1>
+    </div>
+    <div class="state">
+        <div class="score">
+            <% for (var i = 0; i < points.length; i++) { %>
+                <div class="char"><%= points[i] %></div>
+            <% } %>
+        </div>
+        <p>Thanks for keeping the environment clean.</p>
+    </div>
+    <button id="plant" class="btn btn-success btn-lg">Plant a tree</button>
+</div>
+
+<script>
+    let btn = document.getElementById("plant");
+    btn.addEventListener('click',()=>{
+        alert('Your score should be atleast 500 to plant a tree.');
+    })
+</script>
+<%- include('footer') -%>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= locals.title ? title : "Login System" %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
+    integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
+    crossorigin=""></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><img src="/static/assets/logo.png" alt=""></div>
+        <div class="nav">
+            <div class="nav-item"><a href="/route/adminDashboard">Dashboard</a></div>
+            <div class="nav-item"><a href="/route/feedbacks">Feedbacks</a></div>
+        </div>
+    </div>
+    <h2 style="text-align: center; padding: 10px;">Pending Pickups</h2>
+    <table class="table table-striped">
+        <tr  class="bg-info">
+            <th>Date</th>
+            <th>Slot</th>
+            <th>Category</th>
+            <th>Address</th>
+            <th>Phone No.</th>
+            <th></th>
+        </tr>
+        <% for(var i of pendingOrders){ %>
+            <tr>
+                <th> <%= i.date %></th>
+                <th> <%= i.slot %></th>
+                <th> <%= i.category %></th>
+                <th> <%= i.address %></th>
+                <th> <%= i.phoneNo %></th>
+                <th>
+                    <button type="submit" class="btn btn-primary"><a href="/route/assign/<%= i.orderId %>">Details</a></button>
+                </th>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>
