@@ -1,0 +1,76 @@
+<%- include('headerReceiver') -%>
+<style>
+    .page{
+        height: 85vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #tick-mark {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    }
+
+    #tick-mark::before {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 50%;
+        width: 3px;
+        background-color: black;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+
+    #tick-mark::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background-color: black;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+    .circle{
+        height: 250px;
+        width: 250px;
+        margin: 10px;
+        border-radius: 50%;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tick-mark{
+        transform: scale(5);
+    }
+    .content, .text{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+</style>
+
+<div class="page">
+    <div class="content">
+        <div class="text">
+            <h3>Thanks For saving the environment</h1>
+        </div>
+        <div class="circle">
+            <div id="tick-mark"></div>
+        </div>
+        <div class="text">
+            <p>Otp was Correct</p>
+            <p>Order Completed Successfully!</p>
+        </div>
+    </div>
+</div>
+<%- include('footer') -%>

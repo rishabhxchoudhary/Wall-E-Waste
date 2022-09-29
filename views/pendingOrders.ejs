@@ -1,0 +1,47 @@
+<%- include('headerReceiver') -%>
+
+<h2 style="text-align: center; padding: 10px;">Pending Pickups</h2>
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th>Date</th>
+        <th>Slot</th>
+        <th>Category</th>
+        <th>Address</th>
+        <th>Phone No.</th>
+        <th></th>
+    </tr>
+    <% for(var i of pending){ %>
+        <tr>
+            <th> <%= i.date %></th>
+            <th> <%= i.slot %></th>
+            <th> <%= i.category %></th>
+            <th> <%= i.address %></th>
+            <th> <%= i.phoneNo %></th>
+            <th>
+                <button type="submit" class="btn btn-primary"><a href="/route/orderdetails/<%= i.orderId %>">Details</a></button>
+            </th>
+        </tr>
+    <% } %>
+</table>
+
+
+<h2 style="text-align: center; padding: 10px; margin-top: 20px;">Completed Pickups</h2>
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th>Date</th>
+        <th>Slot</th>
+        <th>Category</th>
+        <th>Address</th>
+        <th>Phone No.</th>
+    </tr>
+    <% for(var i of completed){ %>
+        <tr>
+            <th> <%= i.date %></th>
+            <th> <%= i.slot %></th>
+            <th> <%= i.category %></th>
+            <th> <%= i.address %></th>
+            <th> <%= i.phoneNo %></th>
+        </tr>
+    <% } %>
+</table>
+<%- include('footer') -%>

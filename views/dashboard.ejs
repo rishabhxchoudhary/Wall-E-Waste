@@ -1,0 +1,107 @@
+<%- include('header') -%>
+<style>
+    html,body{
+    height: 100vh;
+    overflow: hidden;
+    }
+    .main1{
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        overflow: scroll;
+        height: 85vh;
+    }
+
+    .child{
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        height: 85vh;
+    }
+    .page1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .page1 h1{
+        margin: 50px;
+        padding: 10px;
+    }
+    .page1 .content{
+        display: flex;
+        justify-content: space-around;
+        height: 100%;
+    }
+    .page1 .text{
+        padding: 20px;
+        width: 50%;
+        /* border: 1px solid red;; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .images{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        /* border: 1px solid red;; */
+    }
+    .images img{
+        /* height: 200px; */
+        width: 250px;
+    }
+
+    /* Page 2 */
+    .content2{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: space-evenly;
+    }
+    .content2 .heading,.content2 .para{
+        margin: 40px;
+        padding: 10px;
+    }
+
+
+</style>
+<div class="main1">
+    <div class="page1 child">
+        <h1>Welcome <%= locals.user ? user.name: "User" %>,</h1>
+        <div class="content">
+            <div class="text">
+                    <div class="text1">
+                        <h2>Why Recycle?</h2>
+                        <p>Every month more than thousand tons of waste is generated in every corner of the globe. If not treated well, it can have devastating consequences on not only the present , environment and health of living beings but also for the future generation.</p>
+                    </div>
+                    <div class="text1">
+                        <h3>Your contribution matters a lot to the coming future generations.</h3>
+                           <h3>Donate us your E-Waste and contribute to a better world</h3>
+
+                </div>
+            </div>
+            <div class="images">
+                <img src="/static/assets/P1.png" alt="">
+                <img src="/static/assets/P2.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="page2 child">
+        <div class="content2">
+            <div class="heading">
+                <h1>About E-Waste</h1>
+            </div>
+            <div class="para">
+                <p>It's no secret that humans generate all manners of waste. Residential and commercial waste exist, including municipal, animal and industrial, radioactive or hazardous waste, and more. It must then be managed through reusing, recycling, storage, treatment or disposal. Most of it is sent to one of the many landfills scattered throughout the country.</p>
+                <p>When e-waste ends up in a landfill, the surrounding soil can become contaminated with toxic substances such as mercury, cadmium, beryllium and lead. These chemicals enter the soil, waterways and air, leading to polluted environments and negatively impacting human and marine life.</p>
+                <p>According to the World Health Organization (WHO), these are some of the adverse health effects caused by exposure to e-waste are <b> Negative birth outcomes for expecting mothers, such as stillbirth or premature birth, Increased rates of ADHD in young children, Changes in lung function, DNA damage, Respiratory issues, Impaired thyroid function, Increased risk of chronic diseases like cancer and cardiovascular disease.</b></p>
+                <p>Additionally, the WHO reports that appropriate collection and recycling of e-waste can help protect the environment and human health.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') -%>
