@@ -27,7 +27,7 @@ router.post('/order', upload.single('image'), function (req, res) {
     let slot = req.body.slot;
     let image = req.file.filename;
     let phoneNo = req.body.phoneNo;
-    let pincode = req.body.pincode;
+    let pincode = Number(req.body.pincode);
     console.log(pincode);
     let otp = Math.floor((Math.random()+0.1)*10000);
     let orderId = Math.floor((Math.random()+0.1)*10000000000);
@@ -112,7 +112,9 @@ router.get("/pendingOrders", async(req,res)=> {
     if(req.session.user){
         let result = await database.findCollectorOrders(req.session.user.email);
         let pendingOrders = await database.findPendingCollectorOrders(req.session.user.email);
+        console.log(pendingOrders);
         let completedOrders = await database.findCompletedCollectorOrders(req.session.user.email);
+
         // console.log(result);
         res.render("pendingOrders",{
             user: req.session.user,
@@ -149,7 +151,7 @@ router.post("/signupReceiver", async(req,res)=>{
     let email = await req.body.email;
     let password = req.body.password;
     let name = req.body.name;
-    let pincode = 110078;
+    let pincode = Number(req.body.pincode);
     let result = await database.findReceiver(email);
     if (result!=null){ res.send("A Receiver already registered with with email!"); }
     else{
@@ -175,7 +177,7 @@ router.get("/dashboard", (req,res)=> {
 
 router.get("/dashboardReceiver", async(req,res)=> {
     if(req.session.user){
-        let result = await database.findCollectorOrders();
+        let result = await database.findCollectorOrders(req.session.user.email);
         console.log(result);
         res.render("dashboardReceiver",{
             user: req.session.user,
@@ -278,12 +280,12 @@ router.get("/points/",async(req,res)=>{
 
 // Admin page
 router.post('/adminLogin',async (req,res)=>{
-    let username = req.body.username;
+    let username = Number(req.body.username);
     let password = req.body.password;
-    if (username=='root' && password=='root'){
+    if (password=='root'){
         req.session.user = {
             name : 'root',
-            pincode: '110078'
+            pincode: username
         };
         res.redirect('/route/admindashboard');
     }
@@ -293,6 +295,7 @@ router.post('/adminLogin',async (req,res)=>{
 })
 
 router.get('/admindashboard',async (req,res)=>{
+    console.log(req.session.user.pincode);
     let pendingOrders = await database.findPendingAdminOrders(Number(req.session.user.pincode));
     console.log(pendingOrders);
     res.render("adminDashboard",{pendingOrders: pendingOrders});
@@ -307,7 +310,7 @@ router.get('/assign/:id',async (req,res)=>{
     if(req.session.user){
         let orderId = Number(req.params.id);
         let result = await database.ordersDetails(orderId);
-        let e = await database.findCollectors(110078);
+        let e = await database.findCollectors(Number(req.session.user.pincode));
         // console.log(result);
         if (result.Pending==true){
             result.emails=e;

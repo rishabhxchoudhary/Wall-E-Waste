@@ -335,7 +335,12 @@ async function findPendingCollectorOrders(email){
         var date = yyyy+'-'+mm+'-'+dd;
         console.log(date);
         // Creating a query
-        const query = { "Pending" : true , "assigned": true, "collectorsEmailId": email,"date":date};
+        const query = { 
+            "Pending" : true , 
+            "assigned": true, 
+            "collectorsEmailId": email,
+            // "date":date
+        };
 
         const man = await citizen.find(query).toArray();
         console.log(man);
@@ -475,7 +480,6 @@ async function insertFeedback(Id,suggestion,complaint) {
     }
 }
 module.exports.insertFeedback = insertFeedback;
-// findPendingAdminOrders(110078);
 async function findCollectors(pincode) {
     const client = new MongoClient(uri);
     const database = client.db('EWasteManagement');

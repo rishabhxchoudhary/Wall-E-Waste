@@ -5,7 +5,7 @@ const bodyparser = require("body-parser");
 const session = require("express-session");
 const { v4:uuidv4 } = require("uuid");
 const router = require("./router")
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set("view engine","ejs");
 app.use(bodyparser.json());
@@ -43,6 +43,7 @@ app.get("/signupCollector",(req,res)=>{
 app.get("/admin",(req,res)=>{
     res.render("adminLogin");
 })
+
 
 app.listen(port, ()=>{
     console.log(`Server running on port ${port}`);

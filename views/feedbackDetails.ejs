@@ -149,29 +149,6 @@
     tiles.addTo(mymap);
     var marker = L.marker([latitude, longitude]).addTo(mymap).bindPopup("Pickup Location").openPopup();
 
-    if('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(position => {
-            L.circle([position.coords.latitude, position.coords.longitude], {
-                color: 'blue',
-                fillColor: '#7669EB',
-                fillOpacity: 1,
-                radius: 20
-            }).addTo(mymap).bindPopup("Current Location");
-            lat = position.coords.latitude;
-            lon = position.coords.longitude;
-            let element = document.getElementById('direction');
-            let s = `https://www.google.com/maps/dir/?api=1&origin=${lat}+${lon}&destination=28.613606+77.038297&waypoints=<%= coordinates.latitude %>+<%= coordinates.longitude %>&travelmode=driving`
-            element.href=s;
-        });
-    }
-    var depotCoordinates = [28.613606, 77.038297];
-    L.circle([depotCoordinates[0], depotCoordinates[1]], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 1,
-                radius: 20
-            }).addTo(mymap).bindPopup("Central Depot");
-
 </script>
 <script src="/static/lightbox-plus-jquery.min.js"></script>
 <%- include('footer') -%>

@@ -68,7 +68,7 @@
 
         // Paste your LocationIQ token below.
         //https://us1.locationiq.com/v1/reverse?key=YOUR_ACCESS_TOKEN&lat=-37.870662&lon=144.9803321&format=json
-        xhr.open('GET', "https://us1.locationiq.com/v1/reverse?key=" +
+        xhr.open('GET', "https://us1.locationiq.com/v1/reverse?key=pk.f1b7d296a5f7d12fc198b23f942c2174&lat=" +
         lat + "&lon=" + lng + "&format=json", true);
         xhr.send();
         xhr.onreadystatechange = processRequest;
